@@ -1,0 +1,185 @@
+.main {
+    padding: 30px;
+    /* background: papayawhip; */
+}
+
+.custom-row {
+    margin-right: -125px;
+    margin-left: -135px;
+    font-size: 16px;
+}
+
+.text-warning>small {
+    color: red !important;
+}
+
+.btn-actions {
+    border: none;
+    background-color: transparent;
+}
+
+.btn-actions:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.btn-actions:focus {
+    outline: none;
+}
+
+.filterAccount {
+    border: 0;
+    height: 100%;
+    padding: 1px 10px;
+    background: transparent;
+    outline: none !important;
+}
+
+.filterAccount:hover {
+    color: red;
+}
+
+.card-body thead {
+    color: #000;
+    background-color: #ccc;
+}
+
+.card-body thead a {
+    color: #000;
+    text-decoration: none;
+}
+
+.card-body thead a:hover {
+    color: red;
+}
+
+.card-body thead tr>th:last-child {
+    text-align: left;
+    padding-left: 10px;
+}
+
+.card-body tbody {
+    text-align: left;
+}
+
+.card-body tbody a {
+    margin: 0 11px;
+}
+
+.card-body tbody tr:hover {
+    background-color: #ccc !important;
+    color: red;
+    cursor: pointer;
+}
+
+.td-actions {
+    padding: 0 !important;
+}
+
+.td-actions a {
+    margin: 0 !important;
+}
+
+.td-actions i {
+    font-size: 16px;
+    color: #000;
+    border: none;
+    padding: 10px;
+}
+
+.td-actions i:hover {
+    color: red;
+}
+
+.card-body #datatables_accounts th {
+    font-size: 14px;
+    border-bottom: 1px solid #000;
+}
+
+.card-body #datatables_accounts th i {
+    float: right;
+}
+
+.card-body #datatables_accounts th>a {
+    display: block;
+}
+
+
+/* .settings {
+    display: none !important;
+} */
+
+.card-body .page-nav {
+    float: right;
+    margin-right: 10px;
+}
+
+.card-body .page-nav .page-info {
+    display: inline-block;
+    padding: 0 10px
+}
+
+.card-body .page-nav input {
+    padding: 0 5px;
+}
+
+.row-header {
+    display: flex;
+    padding-top: 20px;
+}
+
+.department-options-top {
+    margin-left: 20px;
+}
+
+.card-header {
+    padding-bottom: 0px !important;
+}
+
+.card-header .row-header:last-child {
+    justify-content: space-between;
+}
+
+.card-header:focus {
+    outline: none;
+}
+
+.search-option {
+    width: 290px;
+    display: flex;
+    position: relative;
+}
+
+.search-option>input {
+    width: 100%;
+    padding-left: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.search-option>i {
+    position: absolute;
+    right: 12px;
+    top: 5px;
+    cursor: pointer;
+}
+
+.search-option>i:hover {
+    color: red;
+}
+
+.card-body {
+    padding-top: 0px !important;
+}
+
+.edit {
+    color: orange;
+}
+
+.delete {
+    color: red;
+}
+
+.form-group label {
+    display: block;
+}

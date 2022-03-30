@@ -1,0 +1,300 @@
+<script src="/js/department.js"></script>
+<script src="/js/accountToDepartment.js"></script>
+
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <h1>Departments List</h1>
+            <div class="row-header">
+                <div class="mb-3 minDate-options">
+                    <div class="">
+                        <label for="Min Date">Min Date</label>
+                        <input type="date" id="minDate" name="minDate">
+                    </div>
+
+                </div>
+
+                <div class="mb-3 pd-left-option maxDate-options">
+                    <div class="">
+                        <label for="Max Date">Max Date</label>
+                        <input type="date" id="maxDate" name="maxDate">
+                    </div>
+
+                </div>
+
+                <div class="mb-3 pd-left-option departmentType-options">
+                    <select class="form-control select2" id="filter-type-select" data-toggle="select2">
+                        <option value="">All Types</option>
+                        <option value="Dev">Dev</option>
+                        <option value="Test">Test</option>
+                        <option value="Scrum_Master">Scrum_Master</option>
+                        <option value="PM">PM</option>
+                        <option value="Bridge_SE">Bridge_SE</option>
+ 
+                    </select>
+                </div>
+
+                <button class="filterDepartment" onclick="filterDepartment()"><i class="material-icons ">&#xef4f;</i></button>
+
+            </div>
+
+            <div class="row-header">
+                <div class="form-group search-option ">
+                    <input id="search-department-input" type="search" placeholder="search by name...">
+                    <i class="material-icons icon-search" id="search-department-button">&#xe8b6;</i>
+                </div>
+
+                <div class="form-group">
+                    <!-- Refresh button -->
+                    <button class="btn-actions" onclick="refreshDepartmentTable()"><i class="material-icons">&#xe863;</i></button>
+                    <!-- Add button -->
+                    <button id="btn-add-department" class="btn-actions" data-toggle="modal" onclick="openAddDepartmentModal()"><i class="material-icons">&#xea20;</i></button>
+                    <!-- Delete multiple department button -->
+                    <button class="btn-actions" onclick="openDeleteMultipleDepartmentsModal()"><i class="material-icons ">&#xe872;</i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <table id="datatables_departments" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th style="width: 45px;"></th>
+                        <th style="width: 20%;" id="th-username">
+                            <a href="#" onclick="changeDepartmentSort('name')">
+                                Name
+                                <i id="name-sort" class="fa-solid fa-sort"></i>
+                            </a>
+                        </th>
+                        <th style="width: 25%;" id="th-totalMember">
+                            <a href="#" onclick="changeDepartmentSort('totalMember')">
+                                Total member
+                                <i id="totalMember-sort" class="fa-solid fa-sort"></i>
+                            </a>
+                        </th>
+
+                        <th style="width: 25%;">
+                            Type
+                        </th>
+                        <th style="width: 20%;" id="th-department">
+                            <a href="#" onclick="changeDepartmentSort('createdDate')">
+                                Created Date
+                                <i id="createdDate-sort" class="fa-solid fa-sort"></i>
+                            </a>
+                        </th>
+                        <th style="width: 120px;">
+                            Actions
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                </tbody>
+            </table>
+
+
+            <div class="page-nav">
+                <input type="button" value="Previous" id="department-previousPage-btn" onclick="prevDepartmentPage()">
+                <div class="page-info" id="department-page-info">
+                    <!-- 10 records 1 of 10 -->
+                </div>
+                <input type="button" value="Next" id="department-nextPage-btn" onclick="nextDepartmentPage()">
+            </div>
+
+        </div>
+    </div>
+
+    <!-- BEGIN primary modal: Edit or Add button -->
+    <div class="modal fade" id="defaultModalPrimary" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <!-- Title -->
+                <div class="modal-header">
+                    <h2 id="title-form-department" class="modal-title">Edit Department</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body m-3">
+                    <form id="form-department">
+                        <!-- DepartmentName select modal -->
+                        <div class="form-group">
+                            <label for="">Name</label>
+                            <input type="text" id="modal-departmentName" class="form-control form-control-lg" name="departmentName" required>
+                            <div id="modal-input-errMess-departmentName" class="input-errMess"></div>
+                        </div>
+
+                        <!-- Department select modal -->
+                        <div class="form-group">
+                            <div class="mb-3 department-options">
+                                <label for="">Type</label>
+                                <select class="form-control select2" id="modal-departmentType-select" data-toggle="select2">
+                                    <option value="">All types</option>
+                                    <option value="Dev">Dev</option>
+                                    <option value="Test">Test</option>
+                                    <option value="Scrum_Master">Scrum_Master</option>
+                                    <option value="PM">PM</option>
+                                    <option value="Bridge_SE">Bridge_SE</option>
+
+                                    </select>
+                                <div id="modal-input-errMess-departmentType" class="input-errMess"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Button save and close -->
+                <div class="modal-footer">
+                    <!-- sdjdajfnafnasnfasnfsanf -->
+                    <button style="float: left;" class="btn btn-primary js-addAccountToDepartment" type="button" onclick="addAccountToDepartment()">Add Accounts</button>
+                    <!-- asfksajfklasfksakfsakfsafs -->
+                    <button id="btn-close-form-department" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="saveDepartment()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END primary modal -->
+
+    <!-- BEGIN danger modal: Delete button -->
+    <div class="modal fade" id="defaultModalDanger" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Delete Department</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body m-3" id="delete-department-confirm-mess">
+                    <!-- <p class="mb-0">Are you sure you want to delete these Records?</p>
+                        <p class="text-warning"><small>This action cannot be undone.</small> </p> -->
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" id="delete-department-btn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END danger modal -->
+
+    <!-- BEGIN primary modal: Add account to department button -->
+    <div class="modal fade" id="defaultModalPrimary1" tabindex="-2" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <!-- Title -->
+                <div class="modal-header">
+                    <h2 id="title-form-department" class="modal-title">Add accounts to department</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+
+                </div>
+                <div class="modal-body m-3" id="addAccountsToDepartment-confirm-mess">
+                </div>
+                <div class="modal-body m-3">
+                    <form id="form-department">
+
+                        <!-- dsgjafjajfkasjfsakj -->
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h1>Accounts List</h1>
+                                    <div class="row-header">
+                                        <div class="mb-3 role-options">
+                                            <select class="form-control select2" id="filter-role-select" data-toggle="select2">
+                                                <option value="">All Roles</option>
+                                                <option value="ADMIN">ADMIN</option>
+                                                <option value="EMPLOYEE">EMPLOYEE</option>
+                                                <option value="MANAGER">MANAGER</option>
+                                            </select>
+                                        </div>
+
+
+                                        <button class="filterAccount" onclick="filterAccount()"><i class="material-icons ">&#xef4f;</i></button>
+                                    </div>
+
+                                    <div class="row-header">
+                                        <div class="form-group search-option ">
+                                            <input id="search-accountInModal-input" type="search" placeholder="search by name...">
+                                            <i class="material-icons icon-search" id="search-account-button">&#xe8b6;</i>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <!-- Refresh button -->
+                                            <button class="btn-actions" onclick="refreshAccountsInModalTable()"><i class="material-icons">&#xe863;</i></button>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    <table id="datatables_accounts" class="table table-striped" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 45px;">
+                                                    <span class="account-checkbox">
+                                                        <label></label>
+                                                    </span>
+                                                </th>
+                                                <th style="width: 20%;" id="th-username">
+                                                    <a href="#" onclick="changeAccountSort('userName')">
+                                                        Username
+                                                        <i id="userName-sort" class="fa-solid fa-sort"></i>
+                                                    </a>
+                                                </th>
+                                                <th style="width: 25%;" id="th-full-name">
+                                                    <a href="#" onclick="changeAccountSort('fullName')">
+                                                        Full Name
+                                                        <i id="fullName-sort" class="fa-solid fa-sort"></i>
+                                                    </a>
+                                                </th>
+                                                <th style="width: 25%;">
+                                                    Role
+                                                </th>
+                                                <th style="width: 20%;" id="th-department">
+                                                    <a href="#" onclick="changeAccountSort('departmentName')">
+                                                        Department
+                                                        <i id="departmentName-sort" class="fa-solid fa-sort"></i>
+                                                    </a>
+                                                </th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+
+
+
+
+
+                                    <div class="page-nav">
+                                        <input type="button" value="Previous" id="account-previousPage-btn" onclick="prevAccountPage()">
+                                        <div class="page-info" id="account-page-info">
+                                            <!-- 10 records 1 of 10 -->
+                                        </div>
+                                        <input type="button" value="Next" id="account-nextPage-btn" onclick="nextAccountPage()">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- askfosafpasofopsaf -->
+                    </form>
+                </div>
+                <!-- Button save and close -->
+                <div class="modal-footer footerInModalCustom">
+                    <button id="btn-close-form-department" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="saveAccountsToDepartment()">Select</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END primary modal -->
+</div>

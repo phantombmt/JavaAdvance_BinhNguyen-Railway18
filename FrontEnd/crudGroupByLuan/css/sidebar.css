@@ -1,0 +1,33 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.wrapper .sidebar {
+    position: fixed;
+    left: 0;
+}
+
+.sidebar #sidenav {
+    position: absolute;
+    left: 0;
+    width: 60px;
+    height: 100vh;
+    border-right: 2px solid rgb(118, 116, 116);
+}
+
+#sidenav a {
+    display: inline-block;
+    width: 60px;
+    padding: 10px 0px;
+    font-size: 30px;
+    text-align: center;
+    text-decoration: none;
+    color: #000;
+    border-bottom: 2px solid rgb(118, 116, 116);
+}
+
+#sidenav a:hover {
+    color: rgb(254, 97, 0);
+}

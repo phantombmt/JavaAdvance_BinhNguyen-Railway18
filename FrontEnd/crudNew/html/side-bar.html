@@ -1,0 +1,39 @@
+<a class="sidebar-brand" href="#">
+    <i class="align-middle" data-feather="box"></i>
+    <span class="align-middle" style="color: orangered;">Final Exam</span>
+</a>
+
+
+
+<li class="sidebar-item" id="homeClick">
+    <a class="sidebar-link" href="#" onclick="handleClickHome()"><i class="fa fa-fw fa-home"></i> Home</a>
+</li>
+
+<li class="sidebar-item " id="accountClick">
+    <a class="sidebar-link" href="#" onclick="handleClickAccounts()"><i class="fa fa-fw fa-user"></i> Accounts</a>
+</li>
+
+<li class="sidebar-item" id="departmentClick">
+    <a class="sidebar-link" href="#" onclick="handleClickDepartments()"><i class="fa fa-fw fa-user-group"></i> Departments</a>
+</li>
+
+
+
+<div class="sidebar-bottom">
+    <div class="media">
+        <img class="rounded-circle mr-3" src="/img/avatars/avatar.jpg" width="60" height="50" style="border-radius: 50%">
+        <div class="media-body">
+            <h4 class="mb-1 avt-title-icon" id="fullName-title" onclick="handleClickHome()">Phantom BMT</h4>
+            <div style="color: orangered;" id="role-sidebar">
+                <i class="fa-solid fa-user-shield" style="color: #ccc;padding-right: 5px;"></i>
+            </div>
+            <div>
+                <i class="fas fa-circle text-success"></i> Online
+            </div>
+            <div class="edit-logout-btn">
+                <!-- <a class="btn btn-primary" href="#">Edit profile</a> -->
+                <a class="btn btn-primary" href="#" onclick="logOut()">Log out</a>
+            </div>
+        </div>
+    </div>
+</div>

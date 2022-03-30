@@ -1,0 +1,69 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.wrapper .header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    z-index: 1;
+}
+
+#navbar {
+    height: 50px;
+    border-bottom: 2px solid rgb(118, 116, 116);
+    position: relative;
+}
+
+#navbar .vti-logo {
+    display: inline-block;
+    height: 50px;
+    width: 60px;
+    border-right: 2px solid rgb(118, 116, 116);
+}
+
+#navbar img {
+    height: 48px;
+    width: 48px;
+}
+
+#navbar .menu-icon {
+    display: inline-block;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    margin: 0px 70px;
+    line-height: 50px;
+    font-size: 35px;
+}
+
+#navbar .user-info {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+}
+
+#navbar a {
+    text-decoration: none;
+    color: #000;
+}
+
+#navbar .user-name,
+#navbar i {
+    display: inline-block;
+    font-size: 28px;
+    line-height: 50px;
+    padding: 0px 5px;
+}
+
+#navbar a:hover {
+    color: rgb(254, 97, 0);
+}
+
+#navbar .menu-icon:hover {
+    color: rgb(254, 97, 0);
+}

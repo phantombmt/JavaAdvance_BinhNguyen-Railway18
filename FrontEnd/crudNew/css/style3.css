@@ -1,0 +1,41 @@
+.pd-left-option {
+    padding-left: 30px;
+}
+
+.mb-3.minDate-options {
+    font-size: 18px;
+}
+
+.mb-3.maxDate-options {
+    font-size: 18px;
+}
+
+.filterDepartment {
+    border: 0;
+    height: 100%;
+    padding: 5px;
+    background: transparent;
+    outline: none !important;
+}
+
+.departmentType-options {
+    padding-right: 30px;
+}
+
+.card-body #datatables_departments th {
+    padding: 8px 3px 8px 12px;
+    font-size: 14px;
+    border-bottom: 1px solid #000;
+}
+
+.card-body #datatables_departments th i {
+    float: right;
+}
+
+.card-body #datatables_departments th>a {
+    display: block;
+}
+
+.footerInModalCustom {
+    margin-top: 50px;
+}

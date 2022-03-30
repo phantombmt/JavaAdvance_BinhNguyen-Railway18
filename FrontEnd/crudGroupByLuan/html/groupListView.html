@@ -1,0 +1,177 @@
+<div class="glv-container">
+    <div class="glv-heading">
+        Manage Group
+        <i class="fas fa-users"></i>
+    </div>
+    <div class="glv-table">
+        <div class="glv-table-title">Group List</div>
+        <div class="table-wrapper">
+            <div class="function-bar">
+                <div class="search-bar">
+                    <i class="fas fa-search search-icon"></i>
+                    <input class="form-control" type="text" id="searchInput" placeholder="Search for group..." data-toggle="tooltip" title="Input anything">
+
+                </div>
+                <div class="add-sync-del-btn">
+                    <a href="#" data-toggle="tooltip" title="Add" onclick="showAddGroupModal()">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                    <a href="#" data-toggle="tooltip" title="Refresh" onclick="refreshGroupList()">
+                        <i class="fas fa-sync"></i>
+                    </a>
+                    <a href="#" data-toggle="tooltip" title="Delete" onclick="showDeleteModal()">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </div>
+            </div>
+            <table class="table table-striped table-hover" id="mytable">
+                <thead>
+                    <tr>
+                        <th style="width: 5%;">
+                            <span class="custom-checkbox">
+                                <input type="checkbox" id="selectAll" value="0">
+                                <label for="selectAll"></label>
+                            </span>
+                        </th>
+                        <th style="width:10%;" id="th-number">
+                            <a href="#" onclick="sort_number()">
+                                No. 
+                                <i class="fa-solid fa-arrow-up-short-wide"></i>
+                                <i class="fa-solid fa-arrow-down-short-wide"></i>
+                            </a>
+                        </th>
+                        <th style="width:25%;" id="th-name">
+                            <a href="#" onclick="sort_name()">
+                                Group Name 
+                                <i class="fa-solid fa-arrow-up-short-wide"></i>
+                                <i class="fa-solid fa-arrow-down-short-wide"></i>
+                            </a>
+                        </th>
+                        <th style="width:15%;" id="th-member">
+                            <a href="#" onclick="sort_member()">
+                                Member 
+                                <i class="fa-solid fa-arrow-up-short-wide"></i>
+                                <i class="fa-solid fa-arrow-down-short-wide"></i>
+                            </a>
+                        </th>
+                        <th style="width:25%;" id="th-creator">
+                            <a href="#" onclick="sort_creator()">
+                                Creator 
+                                <i class="fa-solid fa-arrow-up-short-wide"></i>
+                                <i class="fa-solid fa-arrow-down-short-wide"></i>
+                            </a>
+                        </th>
+                        <th style="width:20%;" id="th-createDate">
+                            <a href="#" onclick="sort_createDate()">
+                                Create Date 
+                                <i class="fa-solid fa-arrow-up-short-wide"></i>
+                                <i class="fa-solid fa-arrow-down-short-wide"></i>
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+
+                </tbody>
+
+            </table>
+            <input type="hidden" id="number_order" value="asc">
+            <input type="hidden" id="name_order" value="asc">
+            <input type="hidden" id="member_order" value="asc">
+            <input type="hidden" id="creator_order" value="asc">
+            <input type="hidden" id="createDate_order" value="asc">
+        </div>
+    </div>
+
+    <!-- Add group modal HTML -->
+    <div class="modal fade" id="addAndUpdateModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="addAndUpdate-modal-title" style="text-align: center;">
+
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="id" name="id" value="">
+                    <label for="name"><b>Group name:</b></label>
+                    <input type="text" placeholder="Enter a name" name="name" id="name" required onkeyup="checkNameExist()">
+                    <div id="errMess">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="save-btn" type="button" class="btn btn-default" onclick="save()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Group detail modal HTML -->
+    <div class="modal fade" id="detailModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="text-align: center;">Group details <i class="fas fa-users"></i></h4>
+                </div>
+                <div class="modal-body">
+                    <div id="detail-name">
+
+                    </div>
+
+                    <div id="detail-creator">
+
+                    </div>
+                    <div id="detail-createDate">
+
+                    </div>
+                    <div id="detail-member">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Group delete modal HTML -->
+    <div class="modal fade" id="deleteModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="text-align: center;">Delete Group <i class="fas fa-users"></i></h4>
+                </div>
+                <div class="modal-body" id="delete-confirm-mess">
+                    This action can not be undone. Delete?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="delete-btn" type="button" class="btn btn-default" onclick="getCheckedGroup()">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Group must check boxs to delete modal HTML -->
+    <div class="modal fade" id="mustCheckToDeleteModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="text-align: center;">Delete Group <i class="fas fa-users"></i></h4>
+                </div>
+                <div class="modal-body" id="must-checkbox-mess">
+                    You must select at least one group to delete!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
